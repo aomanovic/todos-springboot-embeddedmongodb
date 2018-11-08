@@ -12,7 +12,7 @@ import com.mongodb.MongoClient;
 public class MongoConfig {
 
     private static final String MONGO_DB_URL = "localhost";
-    private static final String MONGO_DB_NAME = "todos";
+    private static final String MONGO_DB_NAME = "embeded_db";
     @Bean
     public MongoTemplate mongoTemplate() throws IOException {
         EmbeddedMongoFactoryBean mongo = new EmbeddedMongoFactoryBean();
