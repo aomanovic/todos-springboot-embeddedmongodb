@@ -9,7 +9,7 @@ import {NgForm} from '@angular/forms';
 })
 
 export class TodoListComponent implements OnInit {
-  todos: Todo[];
+  todos: Todo[] = [];
   newTodo: Todo = new Todo();
   editing: boolean = false;
   editingTodo: Todo = new Todo();
