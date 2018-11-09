@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,9 @@ public class TodoController {
 
     @PostMapping("/todos")
     public Todo createTodo(@Valid @RequestBody Todo todo) {
-        todo.setCompleted(false);
+        if(todo.getEventTime() == null || todo.getEventTime().before(new Date())) {
+            todo.setEventTime(new Date());
+        }
         return todoRepository.save(todo);
     }
 
@@ -43,7 +46,8 @@ public class TodoController {
         return todoRepository.findById(id)
                 .map(todoData -> {
                     todoData.setTitle(todo.getTitle());
-                    todoData.setCompleted(todo.getCompleted());
+                    todoData.setDescription(todo.getDescription());
+                    todoData.setEventTime(todo.getEventTime());
                     Todo updatedTodo = todoRepository.save(todoData);
                     return ResponseEntity.ok().body(updatedTodo);
                 }).orElse(ResponseEntity.notFound().build());

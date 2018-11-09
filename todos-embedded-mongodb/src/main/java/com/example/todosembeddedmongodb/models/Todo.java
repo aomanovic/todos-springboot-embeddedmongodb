@@ -20,16 +20,20 @@ public class Todo {
     @Indexed(unique=true)
     private String title;
 
-    private Boolean completed = false;
+    @NotBlank
+    @Size(max=1000)
+    private String description;
 
-    private Date createdAt = new Date();
+    private Date eventTime = new Date();
 
     public Todo() {
         super();
     }
 
-    public Todo(String title) {
+    public Todo(String title, String description, Date eventTime) {
         this.title = title;
+        this.description = description;
+        this.eventTime = eventTime;
     }
 
     public String getId() {
@@ -48,26 +52,26 @@ public class Todo {
         this.title = title;
     }
 
-    public Boolean getCompleted() {
-        return completed;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getEventTime() {
+        return eventTime;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setEventTime(Date eventTime) {
+        this.eventTime = eventTime;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Todo[id=%s, title='%s', completed='%s']",
-                id, title, completed);
+                "Todo[id=%s, title='%s', description='%s', eventTime='%s']",
+                id, title, description, eventTime);
     }
 }
